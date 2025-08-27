@@ -126,7 +126,7 @@ function AuthComponent() {
                   width: 64, 
                   height: 64, 
                   marginBottom: 16,
-                  filter: 'brightness(0) invert(1)' // Make it white
+                  filter: 'brightness(1.2) drop-shadow(2px 4px 10px black)' // Make it white
                 }} 
               />
               <Typography variant="h4" gutterBottom fontWeight="bold">
