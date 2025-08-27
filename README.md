@@ -2,6 +2,9 @@
 
 A modern, responsive React application for tracking job applications with Firebase backend integration. Built with Material UI for a professional and polished user experience.
 
+## Go Live 🛜 
+  (https://job-tracker-amber-psi.vercel.app/)
+
 ## Features
 
 - **User Authentication**: Secure sign-up and sign-in with Firebase Auth
