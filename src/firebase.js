@@ -14,6 +14,12 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
+const openAIConfig = {
+apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+baseURL: import.meta.env.VITE_OPENAI_API_BASE || 'https://api.openai.com/v1',
+deploymentName: import.meta.env.VITE_OPENAI_DEPLOYMENT_NAME || 'gpt-4',
+};
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
