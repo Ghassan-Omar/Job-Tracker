@@ -21,14 +21,18 @@ import {
   Work as WorkIcon, 
   AccountCircle as AccountIcon,
   Logout as LogoutIcon,
-  Dashboard as DashboardIcon
+  Dashboard as DashboardIcon,
+  AdminPanelSettings as AdminIcon
 } from '@mui/icons-material';
 import JobApplicationForm from './components/JobApplicationForm';
 import JobApplicationList from './components/JobApplicationList';
 import JobDashboard from './components/JobDashboard';
+import AdminPanel from './components/AdminPanel';
 import AuthComponent from './components/AuthComponent';
+// import FirebaseSetupGuide from './components/FirebaseSetupGuide';
 import { auth } from './firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { initializeUserProfile, getUserProfile, isUserAdmin } from './utils/userRoles';
 import './App.css';
 
 // Create Material UI theme
@@ -62,16 +66,37 @@ const theme = createTheme({
 
 function App() {
   const [user, setUser] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingJob, setEditingJob] = useState(null);
   const [refreshList, setRefreshList] = useState(0);
-  const [currentView, setCurrentView] = useState('applications'); // 'dashboard' or 'applications'
+  const [currentView, setCurrentView] = useState('applications'); // 'dashboard', 'applications', 'admin'
   const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          // Initialize or get user profile
+          const profile = await initializeUserProfile(user);
+          setUserProfile(profile);
+          
+          // Check admin status
+          const adminStatus = await isUserAdmin(user.uid);
+          setIsAdmin(adminStatus);
+          
+          setUser(user);
+        } catch (error) {
+          console.error('Error setting up user profile:', error);
+          setUser(user);
+        }
+      } else {
+        setUser(null);
+        setUserProfile(null);
+        setIsAdmin(false);
+      }
       setLoading(false);
     });
 
@@ -164,9 +189,20 @@ function App() {
               <IconButton
                 color={currentView === 'applications' ? 'secondary' : 'inherit'}
                 onClick={() => setCurrentView('applications')}
+                sx={{ mr: 1 }}
               >
                 <WorkIcon />
               </IconButton>
+              {/* Admin Panel Button - Only visible to admins */}
+              {isAdmin && (
+                <IconButton
+                  color={currentView === 'admin' ? 'secondary' : 'inherit'}
+                  onClick={() => setCurrentView('admin')}
+                  sx={{ mr: 1 }}
+                >
+                  <AdminIcon />
+                </IconButton>
+              )}
             </Box>
 
             {/* User Menu */}
@@ -225,6 +261,10 @@ function App() {
               </Box>
               <JobDashboard refreshTrigger={refreshList} />
             </>
+          ) : currentView === 'admin' && isAdmin ? (
+            <>
+              <AdminPanel />
+            </>
           ) : (
             <>
               <Box sx={{ mb: 3 }}>
@@ -276,4 +316,3 @@ function App() {
 }
 
 export default App;
-
