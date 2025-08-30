@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
 import {
-  Box,
-  Typography,
-  Paper,
-  Button,
-  TextField,
-  Card,
-  CardContent,
-  Grid,
-  Chip,
-  LinearProgress,
-  Alert,
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  Card,
+  CardContent,
+  TextField,
+  Chip, 
+  Divider,
+    Grid,
+  Typography,
+  Paper,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  CircularProgress,
-  Rating,
-  Divider,
 } from '@mui/material';
 import {
   CloudUpload as UploadIcon,
@@ -34,7 +32,7 @@ import {
   Lightbulb as IdeaIcon,
 } from '@mui/icons-material';
 import aiService from '../services/aiService';
-
+// import  from '@mui/material/Grid';
 function ResumeAnalyzer() {
   const [resumeText, setResumeText] = useState('');
   const [targetRole, setTargetRole] = useState('');

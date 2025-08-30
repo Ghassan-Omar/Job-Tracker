@@ -10,7 +10,6 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Grid,
   Alert,
   Box,
   IconButton,
@@ -19,7 +18,7 @@ import {
 import { Close as CloseIcon, Work as WorkIcon } from '@mui/icons-material';
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../firebase';
-
+import Grid from '@mui/material/Grid';
 const statusOptions = [
   { value: 'applied', label: 'Applied', color: '#2196f3' },
   { value: 'interview', label: 'Interview Scheduled', color: '#ff9800' },

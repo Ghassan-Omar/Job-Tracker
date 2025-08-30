@@ -34,7 +34,7 @@ import {
 } from '@mui/icons-material';
 import { collection, query, where, orderBy, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../firebase';
-
+import Grid from '@mui/material/Grid';
 const statusOptions = [
   { value: 'applied', label: 'Applied', color: '#2196f3' },
   { value: 'interview', label: 'Interview Scheduled', color: '#ff9800' },

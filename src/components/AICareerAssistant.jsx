@@ -13,7 +13,6 @@ import {
   Divider,
   CircularProgress,
   Alert,
-  Grid,
   Tooltip,
 } from '@mui/material';
 import {
@@ -32,7 +31,7 @@ import { collection, query, where, getDocs, orderBy, limit } from 'firebase/fire
 import { auth, db } from '../firebase';
 import { getUserProfile } from '../utils/userRoles';
 import aiService from '../services/aiService';
-
+import Grid from '@mui/material/Grid';
 function AICareerAssistant() {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
@@ -245,7 +244,7 @@ What would you like to discuss today?`,
             </Grid>
             <Grid item xs={6} sm={3}>
               <Chip 
-                icon={<TrendingUpIcon />} 
+                icon={<CareerIcon />} 
                 label={`${userContext.successRate}% Success Rate`} 
                 size="small" 
                 variant="outlined"

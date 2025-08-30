@@ -6,7 +6,6 @@ import {
   Button,
   Card,
   CardContent,
-  Grid,
   Chip,
   Alert,
   Accordion,
@@ -41,7 +40,7 @@ import { collection, query, where, getDocs, orderBy, limit } from 'firebase/fire
 import { auth, db } from '../firebase';
 import { getUserProfile } from '../utils/userRoles';
 import aiService from '../services/aiService';
-
+import Grid from '@mui/material/Grid';
 function CareerInsights() {
   const [insights, setInsights] = useState(null);
   const [loading, setLoading] = useState(false);

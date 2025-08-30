@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   Box,
-  Grid,
   Paper,
   Typography,
   Card,
@@ -13,6 +12,7 @@ import {
   ListItemText,
   ListItemIcon,
   Divider,
+  Grid,
 } from '@mui/material';
 import {
   TrendingUp as TrendingUpIcon,
@@ -24,7 +24,6 @@ import {
 } from '@mui/icons-material';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db, auth } from '../firebase';
-
 const statusOptions = [
   { value: 'applied', label: 'Applied', color: '#2196f3', icon: PendingIcon },
   { value: 'interview', label: 'Interview Scheduled', color: '#ff9800', icon: ScheduleIcon },
