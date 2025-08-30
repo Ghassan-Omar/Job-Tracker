@@ -12,8 +12,12 @@ const firebaseConfig = {
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
-  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-  baseURL: import.meta.env.VITE_OPENAI_API_BASE, 
+};
+
+const openAIConfig = {
+apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+baseURL: import.meta.env.VITE_OPENAI_API_BASE || 'https://api.openai.com/v1',
+deploymentName: import.meta.env.VITE_OPENAI_DEPLOYMENT_NAME || 'gpt-4',
 };
 
 // Initialize Firebase
