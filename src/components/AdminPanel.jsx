@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   Box,
   Typography,
-  Grid,
   Card,
   CardContent,
   Table,
@@ -50,7 +49,7 @@ import {
   USER_ROLES,
 } from '../utils/userRoles';
 import { auth } from '../firebase';
-
+import Grid from '@mui/material/Grid';
 function AdminPanel() {
   const [users, setUsers] = useState([]);
   const [statistics, setStatistics] = useState(null);

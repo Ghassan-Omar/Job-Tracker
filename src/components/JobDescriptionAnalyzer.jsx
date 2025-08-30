@@ -7,7 +7,6 @@ import {
   TextField,
   Card,
   CardContent,
-  Grid,
   Chip,
   Alert,
   Accordion,
@@ -35,7 +34,7 @@ import {
   Assignment as TaskIcon,
 } from '@mui/icons-material';
 import aiService from '../services/aiService';
-
+import Grid from '@mui/material/Grid';
 function JobDescriptionAnalyzer() {
   const [jobDescription, setJobDescription] = useState('');
   const [analysis, setAnalysis] = useState(null);

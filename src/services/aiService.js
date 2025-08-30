@@ -3,8 +3,8 @@
 
 class AIService {
   constructor() {
-    this.apiKey =  import.meta.env.OPENAI_API_KEY || '';
-    this.baseURL = import.meta.env.OPENAI_API_BASE || 'https://api.openai.com/v1';
+    this.apiKey = import.meta.env.VITE_OPENAI_API_KEY || '';
+    this.baseURL = import.meta.env.VITE_OPENAI_API_BASE || 'https://api.openai.com/v1';
   }
 
   /**
