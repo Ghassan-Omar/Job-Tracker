@@ -22,12 +22,21 @@ import {
   AccountCircle as AccountIcon,
   Logout as LogoutIcon,
   Dashboard as DashboardIcon,
-  AdminPanelSettings as AdminIcon
+  AdminPanelSettings as AdminIcon,
+  Psychology as AIIcon,
+  Description as ResumeIcon,
+  Assignment as JobAnalysisIcon,
+  TrendingUp as InsightsIcon,
+  Chat as ChatIcon
 } from '@mui/icons-material';
 import JobApplicationForm from './components/JobApplicationForm';
 import JobApplicationList from './components/JobApplicationList';
 import JobDashboard from './components/JobDashboard';
 import AdminPanel from './components/AdminPanel';
+import ResumeAnalyzer from './components/ResumeAnalyzer';
+import JobDescriptionAnalyzer from './components/JobDescriptionAnalyzer';
+import CareerInsights from './components/CareerInsights';
+import AICareerAssistant from './components/AICareerAssistant';
 import AuthComponent from './components/AuthComponent';
 // import FirebaseSetupGuide from './components/FirebaseSetupGuide';
 import { auth } from './firebase';
@@ -72,7 +81,7 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [editingJob, setEditingJob] = useState(null);
   const [refreshList, setRefreshList] = useState(0);
-  const [currentView, setCurrentView] = useState('applications'); // 'dashboard', 'applications', 'admin'
+  const [currentView, setCurrentView] = useState('applications'); // 'dashboard', 'applications', 'admin', 'resume-analyzer', 'job-analyzer', 'career-insights', 'ai-assistant'
   const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
@@ -183,6 +192,7 @@ function App() {
                 color={currentView === 'dashboard' ? 'secondary' : 'inherit'}
                 onClick={() => setCurrentView('dashboard')}
                 sx={{ mr: 1 }}
+                title="Dashboard"
               >
                 <DashboardIcon />
               </IconButton>
@@ -190,15 +200,52 @@ function App() {
                 color={currentView === 'applications' ? 'secondary' : 'inherit'}
                 onClick={() => setCurrentView('applications')}
                 sx={{ mr: 1 }}
+                title="Job Applications"
               >
                 <WorkIcon />
               </IconButton>
+              
+              {/* AI Features */}
+              <IconButton
+                color={currentView === 'resume-analyzer' ? 'secondary' : 'inherit'}
+                onClick={() => setCurrentView('resume-analyzer')}
+                sx={{ mr: 1 }}
+                title="AI Resume Analyzer"
+              >
+                <ResumeIcon />
+              </IconButton>
+              <IconButton
+                color={currentView === 'job-analyzer' ? 'secondary' : 'inherit'}
+                onClick={() => setCurrentView('job-analyzer')}
+                sx={{ mr: 1 }}
+                title="Job Description Analyzer"
+              >
+                <JobAnalysisIcon />
+              </IconButton>
+              <IconButton
+                color={currentView === 'career-insights' ? 'secondary' : 'inherit'}
+                onClick={() => setCurrentView('career-insights')}
+                sx={{ mr: 1 }}
+                title="Career Insights"
+              >
+                <InsightsIcon />
+              </IconButton>
+              <IconButton
+                color={currentView === 'ai-assistant' ? 'secondary' : 'inherit'}
+                onClick={() => setCurrentView('ai-assistant')}
+                sx={{ mr: 1 }}
+                title="AI Career Assistant"
+              >
+                <ChatIcon />
+              </IconButton>
+              
               {/* Admin Panel Button - Only visible to admins */}
               {isAdmin && (
                 <IconButton
                   color={currentView === 'admin' ? 'secondary' : 'inherit'}
                   onClick={() => setCurrentView('admin')}
                   sx={{ mr: 1 }}
+                  title="Admin Panel"
                 >
                   <AdminIcon />
                 </IconButton>
@@ -264,6 +311,22 @@ function App() {
           ) : currentView === 'admin' && isAdmin ? (
             <>
               <AdminPanel />
+            </>
+          ) : currentView === 'resume-analyzer' ? (
+            <>
+              <ResumeAnalyzer />
+            </>
+          ) : currentView === 'job-analyzer' ? (
+            <>
+              <JobDescriptionAnalyzer />
+            </>
+          ) : currentView === 'career-insights' ? (
+            <>
+              <CareerInsights />
+            </>
+          ) : currentView === 'ai-assistant' ? (
+            <>
+              <AICareerAssistant />
             </>
           ) : (
             <>
