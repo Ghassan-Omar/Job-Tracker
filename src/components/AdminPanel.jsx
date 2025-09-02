@@ -148,7 +148,7 @@ function AdminPanel() {
       <Box display="flex" justifyContent="center" alignItems="center" py={4}>
         <CircularProgress />
         <Typography variant="body1" sx={{ ml: 2 }}>
-          جاري تحميل لوحة الإدارة...
+          Loading Admin Dashboard...
         </Typography>
       </Box>
     );
@@ -160,10 +160,10 @@ function AdminPanel() {
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <Box>
           <Typography variant="h4" gutterBottom>
-            لوحة الإدارة
+            Admin Dashboard
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            إدارة المستخدمين والصلاحيات
+            User & Permissions Management
           </Typography>
         </Box>
         <Button
@@ -172,7 +172,7 @@ function AdminPanel() {
           onClick={loadData}
           disabled={loading}
         >
-          تحديث
+          Refresh
         </Button>
       </Box>
 
@@ -191,7 +191,7 @@ function AdminPanel() {
                 <Box display="flex" alignItems="center" justifyContent="space-between">
                   <Box>
                     <Typography color="text.secondary" gutterBottom variant="body2">
-                      إجمالي المستخدمين
+                      Total Users
                     </Typography>
                     <Typography variant="h4" component="div">
                       {statistics.totalUsers}
@@ -209,7 +209,7 @@ function AdminPanel() {
                 <Box display="flex" alignItems="center" justifyContent="space-between">
                   <Box>
                     <Typography color="text.secondary" gutterBottom variant="body2">
-                      المستخدمين النشطين
+                      Active Users
                     </Typography>
                     <Typography variant="h4" component="div">
                       {statistics.activeUsers}
@@ -227,7 +227,7 @@ function AdminPanel() {
                 <Box display="flex" alignItems="center" justifyContent="space-between">
                   <Box>
                     <Typography color="text.secondary" gutterBottom variant="body2">
-                      المديرين
+                      Admins
                     </Typography>
                     <Typography variant="h4" component="div">
                       {statistics.adminUsers}
@@ -245,7 +245,7 @@ function AdminPanel() {
                 <Box display="flex" alignItems="center" justifyContent="space-between">
                   <Box>
                     <Typography color="text.secondary" gutterBottom variant="body2">
-                      المستخدمين العاديين
+                      Regular Users
                     </Typography>
                     <Typography variant="h4" component="div">
                       {statistics.regularUsers}
@@ -263,20 +263,20 @@ function AdminPanel() {
       <Paper elevation={2}>
         <Box p={3}>
           <Typography variant="h6" gutterBottom>
-            إدارة المستخدمين
+            Manage Users
           </Typography>
           
           <TableContainer>
             <Table>
               <TableHead>
                 <TableRow sx={{ backgroundColor: 'grey.50' }}>
-                  <TableCell><strong>المستخدم</strong></TableCell>
-                  <TableCell><strong>البريد الإلكتروني</strong></TableCell>
-                  <TableCell><strong>الدور</strong></TableCell>
-                  <TableCell><strong>الحالة</strong></TableCell>
-                  <TableCell><strong>تاريخ التسجيل</strong></TableCell>
-                  <TableCell><strong>آخر دخول</strong></TableCell>
-                  <TableCell align="center"><strong>الإجراءات</strong></TableCell>
+                  <TableCell><strong>User</strong></TableCell>
+                  <TableCell><strong>Email</strong></TableCell>
+                  <TableCell><strong>Role</strong></TableCell>
+                  <TableCell><strong>Status</strong></TableCell>
+                  <TableCell><strong>Registration Date</strong></TableCell>
+                  <TableCell><strong>Last Login</strong></TableCell>
+                  <TableCell align="center"><strong>Actions</strong></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -301,8 +301,8 @@ function AdminPanel() {
                       <Chip
                         icon={getRoleIcon(user.role)}
                         label={
-                          user.role === USER_ROLES.ADMIN ? 'مدير' :
-                          user.role === USER_ROLES.MODERATOR ? 'مشرف' : 'مستخدم'
+                          user.role === USER_ROLES.ADMIN ? 'Admin' :
+                          user.role === USER_ROLES.MODERATOR ? 'Moderator' : 'User'
                         }
                         color={getRoleColor(user.role)}
                         size="small"
@@ -310,7 +310,7 @@ function AdminPanel() {
                     </TableCell>
                     <TableCell>
                       <Chip
-                        label={user.isActive ? 'نشط' : 'معطل'}
+                        label={user.isActive ? 'Active' : 'Inactive'}
                         color={user.isActive ? 'success' : 'default'}
                         size="small"
                       />
@@ -327,7 +327,7 @@ function AdminPanel() {
                     </TableCell>
                     <TableCell align="center">
                       <Box display="flex" justifyContent="center" gap={1}>
-                        <Tooltip title="تعديل الدور">
+                        <Tooltip title="Edit Role">
                           <IconButton
                             size="small"
                             onClick={() => handleEditUser(user)}
@@ -336,7 +336,7 @@ function AdminPanel() {
                             <EditIcon fontSize="small" />
                           </IconButton>
                         </Tooltip>
-                        <Tooltip title={user.isActive ? 'تعطيل المستخدم' : 'تفعيل المستخدم'}>
+                        <Tooltip title={user.isActive ? 'Disable User' : 'Enable User'}>
                           <IconButton
                             size="small"
                             onClick={() => handleToggleStatus(user.id, user.isActive)}
@@ -358,43 +358,43 @@ function AdminPanel() {
 
       {/* Edit User Dialog */}
       <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>تعديل دور المستخدم</DialogTitle>
+        <DialogTitle>Change User Role</DialogTitle>
         <DialogContent>
           {selectedUser && (
             <Box sx={{ pt: 2 }}>
               <Typography variant="body1" gutterBottom>
-                <strong>المستخدم:</strong> {selectedUser.email}
+                <strong>User:</strong> {selectedUser.email}
               </Typography>
               <Typography variant="body2" color="text.secondary" gutterBottom sx={{ mb: 3 }}>
-                <strong>الدور الحالي:</strong> {
-                  selectedUser.role === USER_ROLES.ADMIN ? 'مدير' :
-                  selectedUser.role === USER_ROLES.MODERATOR ? 'مشرف' : 'مستخدم'
+                <strong>Current Role</strong> {
+                  selectedUser.role === USER_ROLES.ADMIN ? 'Admin' :
+                  selectedUser.role === USER_ROLES.MODERATOR ? 'Moderator' : 'User'
                 }
               </Typography>
               
               <FormControl fullWidth>
-                <InputLabel>الدور الجديد</InputLabel>
+                <InputLabel>New Role</InputLabel>
                 <Select
                   value={newRole}
                   onChange={(e) => setNewRole(e.target.value)}
-                  label="الدور الجديد"
+                  label="New Role"
                 >
                   <MenuItem value={USER_ROLES.USER}>
                     <Box display="flex" alignItems="center">
                       <PersonIcon sx={{ mr: 1 }} />
-                      مستخدم عادي
+                      Regular Users
                     </Box>
                   </MenuItem>
                   <MenuItem value={USER_ROLES.MODERATOR}>
                     <Box display="flex" alignItems="center">
                       <SecurityIcon sx={{ mr: 1 }} />
-                      مشرف
+                      Moderator
                     </Box>
                   </MenuItem>
                   <MenuItem value={USER_ROLES.ADMIN}>
                     <Box display="flex" alignItems="center">
                       <AdminIcon sx={{ mr: 1 }} />
-                      مدير
+                      Admin
                     </Box>
                   </MenuItem>
                 </Select>
@@ -403,9 +403,9 @@ function AdminPanel() {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setEditDialogOpen(false)}>إلغاء</Button>
+          <Button onClick={() => setEditDialogOpen(false)}>Cancel</Button>
           <Button onClick={handleUpdateRole} variant="contained" disabled={newRole === selectedUser?.role}>
-            حفظ التغييرات
+            Save Changes
           </Button>
         </DialogActions>
       </Dialog>

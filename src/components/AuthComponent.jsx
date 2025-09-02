@@ -99,7 +99,7 @@ function AuthComponent() {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: 'linear-gradient(25deg, #1a88f6ff, #7dc2f6ff, #1a88f6ff)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
